@@ -22,7 +22,7 @@ export const userSlice = createSlice({
         state.error=action.payload;
         state.loading=false;
     }
-  },
+  }
 })
 
 // Action creators are generated for each case reducer function

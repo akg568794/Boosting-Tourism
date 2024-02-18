@@ -7,7 +7,7 @@ const SignIn = () => {
   const[formData,setFormData]=useState({});
   const {loading,error}=useSelector((state)=>state.user);
   const navigate=useNavigate();
-  const dispatch=useDispatch;
+  const dispatch=useDispatch();
   const handleChange=(e)=>{
     setFormData({
       ...formData,
@@ -17,8 +17,8 @@ const SignIn = () => {
   const handleSubmit= async(e)=>{
     e.preventDefault();
     try{
-      dispatch(signInStart);
-    const res=await fetch('/api/auth/sign',{
+      dispatch(signInStart());
+      const res=await fetch('/api/auth/signin',{
       method:'POST',
       headers:{
         'Content-Type':'application/json',
