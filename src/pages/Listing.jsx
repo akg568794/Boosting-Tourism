@@ -4,6 +4,7 @@ import {Swiper, SwiperSlide } from 'swiper/react';
 import  SwiperCore from 'swiper'
 import {Navigation} from 'swiper/modules'
 import 'swiper/css/bundle';
+import {useSelector} from 'react-redux';
 import {
     FaBath,
     FaBed,
@@ -13,6 +14,7 @@ import {
     FaParking,
     FaShare,
   } from 'react-icons/fa';
+import Contact from '../components/Contact';
 
 export default function Listing() {
     const params= useParams();
@@ -20,6 +22,8 @@ export default function Listing() {
     const [loading,setLoading]=useState(true);
     const [error,setError]=useState(false);
     const [copied, setCopied] = useState(false);
+    const [contact,setContact] = useState(false)
+    const {currentUser}=useSelector((state)=>state.user);
     SwiperCore.use([Navigation]);
     useEffect(() =>{
         const fetchListing= async() =>{
@@ -51,7 +55,7 @@ export default function Listing() {
         <Swiper navigation>
             {listing.imageUrls.map((url)=>(
                 <SwiperSlide key={url}>
-                    <div className="h-[550px]" style={{background:`url(${url}) center no-repeat`,backgroundSize:'cover'}}>
+                    <div className="h-[500px]" style={{background:`url(${url}) center no-repeat`,backgroundSize:'cover'}}>
                     </div>
                 </SwiperSlide>
             ))}
@@ -81,7 +85,7 @@ export default function Listing() {
                 : listing.regularPrice.toLocaleString('en-US')}
               {listing.type === 'rent' && ' / month'}
             </p>
-            <p className='flex items-center mt-6 gap-2 text-slate-600 font-semibold'>
+            <p className='flex items-center mt-1 gap-2 text-slate-600 font-semibold text-sm'>
               <FaMapMarkerAlt className='text-green-700' />
               {listing.address}
             </p>
@@ -111,6 +115,12 @@ export default function Listing() {
                     <FaChair className='text-lg' />{listing.parking ? 'Furnished':'Unfurnished'}
                 </li>
             </ul>
+            {currentUser && listing.userRef!==currentUser._id && !contact && (
+                <button onClick={()=>{
+                    setContact(true)
+                }} className='bg-slate-700 text-white rounded-md uppercase hover:opacity-95 p-3'>Contact Landlord</button>
+            )}
+            {contact && <Contact listing={listing}/>}   
           </div>
         </div>
     )}
