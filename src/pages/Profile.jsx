@@ -17,7 +17,7 @@ const Profile = () => {
   const [updateSuccess,setUpdateSuccess]=useState(false);
   const [showListingError,setshowListingsError]=useState(false); 
   const [userListings,setUserListings]=useState([]);
-  console.log(formData);
+  // console.log(formData);
   // firebase storage
     // allow read;
     // allow write: if
@@ -180,7 +180,9 @@ const Profile = () => {
           </Link>
           <div className='flex flex-col items-center'>
           <button onClick={()=>handleListingDelete(listing._id)} className='text-red-700 uppercase'>Delete</button>
+          <Link to={`/update-listing/${listing._id}`}>
           <button className='text-green-700 uppercase'>Edit</button>
+          </Link>
           </div>
         </div>
       ))}
