@@ -79,7 +79,7 @@ export default function Listing() {
           )}
           <div className='flex flex-col max-w-4xl mx-auto p-3 my-6 gap-4'>
           <p className='text-2xl font-semibold'>
-              {listing.name} - ${' '}
+              {listing.name} - ₹{' '}
               {listing.offer
                 ? listing.discountPrice.toLocaleString('en-US')
                 : listing.regularPrice.toLocaleString('en-US')}
@@ -94,7 +94,7 @@ export default function Listing() {
                     {listing.type==='rent'? 'For Rent': 'For Sale'}
                 </p>
                 {listing.offer && (
-                    <p className='bg-green-900 w-full max-w-[200px] text-white text-center rounded-md p-1'>${' '}{+listing.regularPrice- +listing.discountPrice}{' '}Discount</p>
+                    <p className='bg-green-900 w-full max-w-[200px] text-white text-center rounded-md p-1'>₹{' '}{+listing.regularPrice- +listing.discountPrice}{' '}Discount</p>
                 )}
             </div>
             <p className='text-slate-800'>
